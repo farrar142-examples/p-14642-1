@@ -1,7 +1,9 @@
 package com.back.domain.post.post.documents;
 
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -21,16 +23,16 @@ public class Post {
     @Field(type= FieldType.Keyword)
     private String author;
     @Field(type= FieldType.Date,format= DateFormat.date_hour_minute_second_millis)
+    @CreatedBy
     private LocalDateTime createdAt;
     @Field(type= FieldType.Date,format= DateFormat.date_hour_minute_second_millis)
+    @LastModifiedBy
     private LocalDateTime updatedAt;
 
     public Post(String title, String content, String author) {
         this.title = title;
         this.content = content;
         this.author = author;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
     }
 
 }
