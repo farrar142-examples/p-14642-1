@@ -18,6 +18,7 @@ public class BaseInitData {
         return args->{
             work1();
             work2();
+            work3();
         };
     }
     private void work1(){
@@ -40,6 +41,13 @@ public class BaseInitData {
         for (String postId : postService.findAll().stream().map(Post::getId).toList()) {
             Post post = postService.findById(postId).orElseThrow();
             log.debug("Post ID: {}, Title: {}, Author: {}", post.getId(), post.getTitle(), post.getAuthor());
+        }
+    }
+
+    private void work3(){
+        for (Post post: postService.findAll()){
+            Post updatedPost = postService.update(post, post.getTitle() + " (Updated)", post.getContent() + " This content has been updated.");
+            log.debug("Updated Post ID: {}, New Title: {}, New Content: {}", updatedPost.getId(), updatedPost.getTitle(), updatedPost.getContent());
         }
     }
 }

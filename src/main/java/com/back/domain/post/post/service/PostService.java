@@ -25,4 +25,15 @@ public class PostService {
     public Optional<Post> findById(String id) {
         return postRepository.findById(id);
     }
+    public Post update(Post post, String title, String content){
+        if (title != null) {
+            post.setTitle(title);
+        }
+        if (content != null) {
+            post.setContent(content);
+        }
+
+        // Note: In a real application, you would typically set the ID of the updatedPost to match the original post's ID.
+        return postRepository.save(post);
+    }
 }
