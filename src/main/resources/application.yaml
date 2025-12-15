@@ -1,6 +1,9 @@
 spring:
   application:
     name: back
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
   output:
     ansi:
       enabled: ALWAYS
