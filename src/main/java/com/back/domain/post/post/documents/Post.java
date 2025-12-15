@@ -1,7 +1,9 @@
 package com.back.domain.post.post.documents;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -14,7 +16,7 @@ import java.time.LocalDateTime;
 
 @Document(indexName = "posts")
 @NoArgsConstructor
-@Getter
+@Data
 public class Post {
     @Id
     private String id;
