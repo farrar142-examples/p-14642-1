@@ -19,6 +19,7 @@ public class BaseInitData {
             work1();
             work2();
             work3();
+            work4();
         };
     }
     private void work1(){
@@ -49,5 +50,13 @@ public class BaseInitData {
             Post updatedPost = postService.update(post, post.getTitle() + " (Updated)", post.getContent() + " This content has been updated.");
             log.debug("Updated Post ID: {}, New Title: {}, New Content: {}", updatedPost.getId(), updatedPost.getTitle(), updatedPost.getContent());
         }
+    }
+    private void work4(){
+        log.debug("전체 Post entity 개수: {}",postService.count());
+        for (Post post: postService.findAll()){
+            log.debug("Post ID: {}, Title: {}, Author: {}", post.getId(), post.getTitle(), post.getAuthor());
+            postService.delete(post);
+        }
+        log.debug("삭제 후 전체 Post entity 개수: {}",postService.count());
     }
 }

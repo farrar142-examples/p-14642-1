@@ -36,4 +36,7 @@ public class PostService {
         // Note: In a real application, you would typically set the ID of the updatedPost to match the original post's ID.
         return postRepository.save(post);
     }
+    public void delete(Post post){
+        postRepository.delete(post);
+    }
 }
