@@ -1,5 +1,6 @@
 package com.back.domain.post.post.documents;
 
+import com.back.global.document.BaseDocument;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,21 +18,13 @@ import java.time.LocalDateTime;
 @Document(indexName = "posts")
 @NoArgsConstructor
 @Data
-public class Post {
-    @Id
-    private String id;
+public class Post extends BaseDocument {
     @Field(type= FieldType.Text)
     private String title;
     @Field(type= FieldType.Text)
     private String content;
     @Field(type= FieldType.Keyword)
     private String author;
-    @Field(type= FieldType.Date,format= DateFormat.date_hour_minute_second_millis)
-    @CreatedBy
-    private LocalDateTime createdAt;
-    @Field(type= FieldType.Date,format= DateFormat.date_hour_minute_second_millis)
-    @LastModifiedBy
-    private LocalDateTime updatedAt;
 
     public Post(String title, String content, String author) {
         this.title = title;
