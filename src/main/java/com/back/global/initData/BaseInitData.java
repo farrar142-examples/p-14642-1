@@ -1,5 +1,6 @@
 package com.back.global.initData;
 
+import com.back.domain.post.post.documents.Post;
 import com.back.domain.post.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ public class BaseInitData {
     public ApplicationRunner baseInitDataRunner (){
         return args->{
             work1();
+            work2();
         };
     }
     private void work1(){
@@ -31,6 +33,13 @@ public class BaseInitData {
             log.debug("Post entity 데이터 초기화 완료. 총 개수: {}", postService.count());
         } else {
             log.debug("Post entity 데이터 초기화 불필요");
+        }
+    }
+    private void work2(){
+        log.debug("저장된 Post entity 조회 시작");
+        for (String postId : postService.findAll().stream().map(Post::getId).toList()) {
+            Post post = postService.findById(postId).orElseThrow();
+            log.debug("Post ID: {}, Title: {}, Author: {}", post.getId(), post.getTitle(), post.getAuthor());
         }
     }
 }
