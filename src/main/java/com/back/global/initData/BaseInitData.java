@@ -1,5 +1,6 @@
 package com.back.global.initData;
 
+import com.back.domain.post.comment.service.CommentService;
 import com.back.domain.post.post.documents.Post;
 import com.back.domain.post.post.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class BaseInitData {
     private final PostService postService;
+    private final CommentService commentService;
     @Bean
     public ApplicationRunner baseInitDataRunner (){
         return args->{
@@ -58,5 +60,9 @@ public class BaseInitData {
             postService.delete(post);
         }
         log.debug("삭제 후 전체 Post entity 개수: {}",postService.count());
+    }
+
+    private void work5(){
+        log.debug("Comment entity 개수: {}",commentService.count());
     }
 }
