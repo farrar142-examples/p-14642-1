@@ -14,5 +14,9 @@ public class CommentService {
         return commentRepository.count();
     }
 
+    public Comment create(String content, String author){
+        Comment comment = new Comment(content, author);
+        return commentRepository.save(comment);
+    }
 
 }

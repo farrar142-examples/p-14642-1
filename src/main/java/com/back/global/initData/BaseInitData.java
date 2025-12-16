@@ -22,6 +22,7 @@ public class BaseInitData {
             work2();
             work3();
             work4();
+            work5();
         };
     }
     private void work1(){
@@ -64,5 +65,29 @@ public class BaseInitData {
 
     private void work5(){
         log.debug("Comment entity 개수: {}",commentService.count());
+        if (postService.count()==0){
+            log.debug("Post entity 개수가 0 입니다");
+            log.debug("Post entity 데이터 초기화 시작");
+            for (int i = 1; i <= 10; i++) {
+                String title = "Sample Post Title " + i;
+                String content = "This is the content of sample post number " + i + ".";
+                String author = "Author" + i;
+                postService.create(title, content, author);
+            }
+            log.debug("Post entity 데이터 초기화 완료. 총 개수: {}", postService.count());
+        }
+        if (commentService.count() == 0){
+            log.debug("Comment entity 데이터 초기화 시작");
+            for (Post post: postService.findAll()){
+                for (int j = 1; j <= 5; j++) {
+                    String content = "This is comment number " + j + " for post ID " + post.getId() + ".";
+                    String author = "Commenter" + j;
+                    commentService.create(content, author);
+                }
+            }
+            log.debug("Comment entity 데이터 초기화 완료. 총 개수: {}", commentService.count());
+        } else {
+            log.debug("Comment entity 데이터 초기화 불필요");
+        }
     }
 }
