@@ -1,5 +1,6 @@
 package com.back.global.initData;
 
+import com.back.domain.post.comment.document.Comment;
 import com.back.domain.post.comment.service.CommentService;
 import com.back.domain.post.post.documents.Post;
 import com.back.domain.post.post.service.PostService;
@@ -24,6 +25,8 @@ public class BaseInitData {
             work4();
             work5();
             work6();
+            work7();
+            work8();
         };
     }
     private void work1(){
@@ -96,5 +99,21 @@ public class BaseInitData {
         commentService.findAll().forEach(comment -> {
             log.debug("Comment ID: {}, Content: {}, Author: {}", comment.getId(), comment.getContent(), comment.getAuthor());
         });
+    }
+
+    private void work7(){
+        for (Comment comment : commentService.findAll()){
+            Comment updatedComment = commentService.update(comment, comment.getContent() + " (Updated)", comment.getAuthor());
+            log.debug("Updated Comment ID: {}, New Content: {}", updatedComment.getId(), updatedComment.getContent());
+        }
+    }
+
+    private void work8(){
+        log.debug("전체 Comment entity 개수: {}",commentService.count());
+        for (Comment comment: commentService.findAll()){
+            log.debug("Comment ID: {}, Content: {}, Author: {}", comment.getId(), comment.getContent(), comment.getAuthor());
+            commentService.delete(comment);
+        }
+        log.debug("삭제 후 전체 Comment entity 개수: {}",commentService.count());
     }
 }
