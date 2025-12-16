@@ -25,4 +25,15 @@ public class CommentService {
         return commentRepository.findAll();
     }
 
+    public Comment update(Comment comment, String content, String author){
+        if (content != null) {
+            comment.setContent(content);
+        }
+        return commentRepository.save(comment);
+    }
+
+    public void delete(Comment comment){
+        commentRepository.delete(comment);
+    }
+
 }
