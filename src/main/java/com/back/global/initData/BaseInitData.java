@@ -23,6 +23,7 @@ public class BaseInitData {
             work3();
             work4();
             work5();
+            work6();
         };
     }
     private void work1(){
@@ -89,5 +90,11 @@ public class BaseInitData {
         } else {
             log.debug("Comment entity 데이터 초기화 불필요");
         }
+    }
+
+    private void work6(){
+        commentService.findAll().forEach(comment -> {
+            log.debug("Comment ID: {}, Content: {}, Author: {}", comment.getId(), comment.getContent(), comment.getAuthor());
+        });
     }
 }
